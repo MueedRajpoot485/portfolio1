@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mueed Ali Nafees - UI/UX Designer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --nardo-grey: #686A6C;
+            --light-grey: #8A8C8E;
+            --dark-grey: #4A4C4E;
+            --white: #FFFFFF;
+            --off-white: #F5F5F5;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, var(--nardo-grey) 0%, var(--dark-grey) 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated background circles */
+        .bg-circle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .bg-circle:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            top: -150px;
+            left: -150px;
+            animation-delay: 0s;
+        }
+
+        .bg-circle:nth-child(2) {
+            width: 200px;
+            height: 200px;
+            top: 50%;
+            right: -100px;
+            animation-delay: 5s;
+        }
+
+        .bg-circle:nth-child(3) {
+            width: 150px;
+            height: 150px;
+            bottom: -75px;
+            left: 30%;
+            animation-delay: 10s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            33% {
+                transform: translateY(-30px) rotate(120deg);
+            }
+            66% {
+                transform: translateY(30px) rotate(240deg);
+            }
+        }
+
+        /* Main container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            padding: 40px 0;
+        }
+
+        .profile-circle {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 30px;
+            background: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .profile-circle:hover {
+            transform: scale(1.05);
+        }
+
+        .profile-circle::before {
+            content: 'MA';
+            font-size: 48px;
+            font-weight: bold;
+            color: var(--nardo-grey);
+        }
+
+        .profile-circle::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transform: rotate(45deg);
+            transition: all 0.5s;
+            opacity: 0;
+        }
+
+        .profile-circle:hover::after {
+            animation: shine 0.5s ease-in-out;
+        }
+
+        @keyframes shine {
+            0% {
+                transform: translateX(-100%) translateY(-100%) rotate(45deg);
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(100%) translateY(100%) rotate(45deg);
+                opacity: 0;
+            }
+        }
+
+        h1 {
+            color: var(--white);
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .subtitle {
+            color: var(--off-white);
+            font-size: 1.2em;
+            margin-bottom: 30px;
+        }
+
+        /* Info cards */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .info-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .info-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            color: var(--nardo-grey);
+        }
+
+        .card-title {
+            color: var(--white);
+            font-size: 1.3em;
+            margin-bottom: 10px;
+        }
+
+        .card-content {
+            color: var(--off-white);
+            line-height: 1.6;
+        }
+
+        /* Contact buttons */
+        .contact-section {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .contact-btn {
+            display: inline-block;
+            margin: 10px;
+            padding: 15px 30px;
+            background: var(--white);
+            color: var(--nardo-grey);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .contact-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Skills section */
+        .skills-section {
+            margin-top: 60px;
+            text-align: center;
+        }
+
+        .skills-title {
+            color: var(--white);
+            font-size: 2em;
+            margin-bottom: 30px;
+        }
+
+        .skill-circle {
+            display: inline-block;
+            margin: 10px;
+            width: 100px;
+            height: 100px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            line-height: 100px;
+            color: var(--white);
+            font-weight: bold;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .skill-circle:hover {
+            background: var(--white);
+            color: var(--nardo-grey);
+            transform: scale(1.1);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            color: var(--off-white);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+            
+            .profile-circle {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Loading animation */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--nardo-grey);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s;
+        }
+
+        .loader-circle {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top-color: var(--white);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading animation -->
+    <div class="loader" id="loader">
+        <div class="loader-circle"></div>
+    </div>
+
+    <!-- Background circles -->
+    <div class="bg-circle"></div>
+    <div class="bg-circle"></div>
+    <div class="bg-circle"></div>
+
+    <!-- Main content -->
+    <div class="container">
+        <header>
+            <div class="profile-circle"></div>
+            <h1>Mueed Ali Nafees</h1>
+            <p class="subtitle">17 | UI/UX Designer | Concordia College</p>
+        </header>
+
+        <div class="info-grid">
+            <div class="info-card">
+                <div class="card-icon">🎓</div>
+                <h3 class="card-title">Education</h3>
+                <p class="card-content">
+                    1st Year Student at Concordia College<br>
+                    Learning UI/UX Design from Devigners
+                </p>
+            </div>
+
+            <div class="info-card">
+                <div class="card-icon">📍</div>
+                <h3 class="card-title">Location</h3>
+                <p class="card-content">
+                    Faisalabad, Pakistan<br>
+                    Passionate about creating beautiful designs
+                </p>
+            </div>
+
+            <div class="info-card">
+                <div class="card-icon">🎯</div>
+                <h3 class="card-title">Aspiration</h3>
+                <p class="card-content">
+                    Aspiring UI/UX Designer<br>
+                    Creating user-friendly digital experiences
+                </p>
+            </div>
+        </div>
+
+        <div class="skills-section">
+            <h2 class="skills-title">Skills & Interests</h2>
+            <div class="skill-circle" onclick="animateSkill(this)">UI/UX</div>
+            <div class="skill-circle" onclick="animateSkill(this)">Figma</div>
+            <div class="skill-circle" onclick="animateSkill(this)">Design</div>
+            <div class="skill-circle" onclick="animateSkill(this)">Creative</div>
+        </div>
+
+        <div class="contact-section">
+            <a href="mailto:ranamueed9825@gmail.com" class="contact-btn">📧 Email Me</a>
+            <a href="tel:+923147644089" class="contact-btn">📱 Call Me</a>
+        </div>
+
+        <footer>
+            <p>&copy; 2024 Mueed Ali Nafees. Crafted with passion for design.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Remove loader when page loads
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.getElementById('loader').style.opacity = '0';
+                setTimeout(function() {
+                    document.getElementById('loader').style.display = 'none';
+                }, 500);
+            }, 1000);
+        });
+
+        // Animate skill circles
+        function animateSkill(element) {
+            element.style.transform = 'scale(1.2) rotate(360deg)';
+            setTimeout(function() {
+                element.style.transform = 'scale(1) rotate(0deg)';
+            }, 300);
+        }
+
+        // Add parallax effect to background circles
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const circles = document.querySelectorAll('.bg-circle');
+            
+            circles.forEach((circle, index) => {
+                const speed = 0.5 + (index * 0.1);
+                circle.style.transform = `translateY(${scrolled * speed}px)`;
+            });
+        });
+
+        // Add click effect to profile circle
+        document.querySelector('.profile-circle').addEventListener('click', function() {
+            this.style.animation = 'none';
+            setTimeout(() => {
+                this.style.animation = '';
+            }, 10);
+        });
+
+        // Smooth scroll for contact buttons
+        document.querySelectorAll('.contact-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const href = this.getAttribute('href');
+                if (href.startsWith('mailto:') || href.startsWith('tel:')) {
+                    window.location.href = href;
+                }
+            });
+        });
+
+        // Add floating animation to cards on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.info-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(50px)';
+            card.style.transition = 'all 0.6s ease-out';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
